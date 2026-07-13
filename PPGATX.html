@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Party Productions ATX — Request an Invite</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+
+  /* =========================================================
+     DESIGN TOKENS — Party Productions ATX
+     Concept: Austin nightlife meets founder/investor networking.
+     Velvet-rope energy, poster-print type, ticket-stub signature.
+     ========================================================= */
+  :root{
+    --bg:            #0A0A12;   /* near-black indigo night sky */
+    --bg-soft:       #12111C;   /* slightly lifted panel bg */
+    --surface:       #17162238; /* card surface (used with blur) */
+    --surface-solid: #17162A;
+    --hairline:      #2C2A3D;
+    --hot:           #FF3D6E;   /* hot pink — energy / CTA */
+    --hot-dim:       #C9285389;
+    --gold:          #E8B84D;   /* gold — exclusivity / VIP */
+    --text:          #F6F3ED;   /* warm off-white */
+    --text-muted:    #9C98AA;
+    --text-faint:    #6B6879;
+
+    --display: 'Anton', 'Arial Narrow', sans-serif;
+    --body:    'Work Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    --mono:    'Space Mono', monospace;
+
+    --radius: 14px;
+    --container: 1080px;
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html{ scroll-behavior:smooth; }
+
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--body);
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  /* Ambient glow field behind everything */
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    background:
+      radial-gradient(60% 45% at 18% 0%, rgba(255,61,110,0.16), transparent 60%),
+      radial-gradient(50% 40% at 90% 15%, rgba(232,184,77,0.10), transparent 60%),
+      radial-gradient(70% 60% at 50% 100%, rgba(255,61,110,0.08), transparent 60%);
+    pointer-events:none;
+    z-index:0;
+  }
+
+  a{ color:inherit; }
+  img{ max-width:100%; display:block; }
+
+  .wrap{
+    max-width:var(--container);
+    margin:0 auto;
+    padding:0 24px;
+    position:relative;
+    z-index:1;
+  }
+
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    color:var(--gold);
+  }
+
+  /* =========================
+     NAV
+     ========================= */
+  header.nav{
+    position:sticky; top:0; z-index:50;
+    backdrop-filter:blur(10px);
+    background:rgba(10,10,18,0.72);
+    border-bottom:1px solid var(--hairline);
+  }
+  .nav-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 24px;
+    max-width:var(--container);
+    margin:0 auto;
+  }
+  .logo{
+    font-family:var(--display);
+    letter-spacing:0.03em;
+    font-size:19px;
+    text-transform:uppercase;
+  }
+  .logo span{ color:var(--hot); }
+  .nav-cta{
+    font-family:var(--mono);
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    padding:10px 18px;
+    border:1px solid var(--gold);
+    border-radius:999px;
+    color:var(--gold);
+    text-decoration:none;
+    white-space:nowrap;
+    transition:background .2s ease, color .2s ease;
+  }
+  .nav-cta:hover{ background:var(--gold); color:#1a1408; }
+
+  /* =========================
+     HERO
+     ========================= */
+  .hero{
+    padding:88px 0 70px;
+    position:relative;
+  }
+  .hero-inner{
+    display:grid;
+    gap:36px;
+  }
+  .hero h1{
+    font-family:var(--display);
+    text-transform:uppercase;
+    font-weight:400;
+    font-size:clamp(44px, 9vw, 96px);
+    line-height:0.96;
+    letter-spacing:0.01em;
+  }
+  .hero h1 .line2{
+    color:var(--hot);
+    display:block;
+    -webkit-text-stroke:1.5px var(--hot);
+  }
+  .hero-sub{
+    max-width:520px;
+    font-size:17px;
+    color:var(--text-muted);
+  }
+  .hero-actions{
+    display:flex;
+    gap:14px;
+    flex-wrap:wrap;
+    align-items:center;
+    margin-top:6px;
+  }
+  .btn-primary{
+    font-family:var(--mono);
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    background:var(--hot);
+    color:#170007;
+    border:none;
+    padding:16px 30px;
+    border-radius:999px;
+    cursor:pointer;
+    text-decoration:none;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    box-shadow:0 0 0 0 rgba(255,61,110,0.5);
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .btn-primary:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 30px -8px rgba(255,61,110,0.6);
+  }
+  .btn-ghost{
+    font-family:var(--mono);
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    color:var(--text-muted);
+    text-decoration:none;
+    border-bottom:1px solid var(--hairline);
+    padding-bottom:2px;
+  }
+
+  /* Skyline strip signature element */
+  .skyline{
+    width:100%;
+    height:64px;
+    display:block;
+    opacity:0.9;
+  }
+
+  /* =========================
+     STAT / DETAILS STRIP
+     ========================= */
+  .details-strip{
+    border-top:1px solid var(--hairline);
+    border-bottom:1px solid var(--hairline);
+    background:var(--bg-soft);
+  }
+  .details-grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    padding:26px 0;
+  }
+  .detail-item{
+    padding:0 20px;
+    border-left:1px solid var(--hairline);
+  }
+  .detail-item:first-child{ border-left:none; padding-left:0; }
+  .detail-label{
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--text-faint);
+    margin-bottom:6px;
+  }
+  .detail-value{
+    font-family:var(--body);
+    font-weight:600;
+    font-size:15px;
+    color:var(--text);
+  }
+
+  /* =========================
+     PILLARS ("The Room")
+     ========================= */
+  .section{ padding:96px 0; }
+  .section-head{
+    max-width:600px;
+    margin-bottom:52px;
+  }
+  .section-head h2{
+    font-family:var(--display);
+    text-transform:uppercase;
+    font-weight:400;
+    font-size:clamp(32px, 5vw, 52px);
+    line-height:1.02;
+    margin-top:10px;
+  }
+  .pillars{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:1px;
+    background:var(--hairline);
+    border:1px solid var(--hairline);
+    border-radius:var(--radius);
+    overflow:hidden;
+  }
+  .pillar{
+    background:var(--bg-soft);
+    padding:36px 30px;
+  }
+  .pillar-index{
+    font-family:var(--mono);
+    color:var(--hot);
+    font-size:13px;
+    margin-bottom:22px;
+  }
+  .pillar h3{
+    font-family:var(--display);
+    text-transform:uppercase;
+    font-weight:400;
+    font-size:22px;
+    margin-bottom:12px;
+    letter-spacing:0.01em;
+  }
+  .pillar p{
+    color:var(--text-muted);
+    font-size:14.5px;
+  }
+
+  /* =========================
+     RSVP — Ticket stub card
+     ========================= */
+  .rsvp{
+    padding:100px 0 120px;
+    position:relative;
+  }
+  .ticket{
+    max-width:620px;
+    margin:0 auto;
+    position:relative;
+    background:var(--surface-solid);
+    border:1px solid var(--hairline);
+    border-radius:20px;
+    display:grid;
+    grid-template-columns:1fr 120px;
+    box-shadow:0 40px 80px -30px rgba(0,0,0,0.7);
+  }
+  .ticket-main{ padding:44px 40px; }
+  .ticket-stub{
+    border-left:2px dashed var(--hairline);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+  }
+  .ticket-stub span{
+    writing-mode:vertical-rl;
+    text-orientation:mixed;
+    font-family:var(--mono);
+    letter-spacing:0.24em;
+    font-size:12px;
+    color:var(--gold);
+    text-transform:uppercase;
+  }
+  /* perforation notches */
+  .ticket::before, .ticket::after{
+    content:"";
+    position:absolute;
+    right:118px;
+    width:22px; height:22px;
+    background:var(--bg);
+    border-radius:50%;
+    z-index:2;
+  }
+  .ticket::before{ top:-11px; }
+  .ticket::after{ bottom:-11px; }
+
+  .ticket-eyebrow{ margin-bottom:8px; }
+  .ticket h2{
+    font-family:var(--display);
+    text-transform:uppercase;
+    font-weight:400;
+    font-size:clamp(28px, 4.4vw, 38px);
+    line-height:1.02;
+    margin-bottom:10px;
+  }
+  .ticket-desc{
+    color:var(--text-muted);
+    font-size:14.5px;
+    margin-bottom:30px;
+    max-width:420px;
+  }
+
+  form{ display:flex; flex-direction:column; gap:16px; }
+  .field{ display:flex; flex-direction:column; gap:7px; }
+  .field label{
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--text-faint);
+  }
+  .field input{
+    background:#0D0C16;
+    border:1px solid var(--hairline);
+    border-radius:10px;
+    padding:13px 14px;
+    color:var(--text);
+    font-family:var(--body);
+    font-size:15px;
+    outline:none;
+    transition:border-color .15s ease, box-shadow .15s ease;
+  }
+  .field input::placeholder{ color:var(--text-faint); }
+  .field input:focus{
+    border-color:var(--hot);
+    box-shadow:0 0 0 3px rgba(255,61,110,0.18);
+  }
+  .field input:invalid:not(:placeholder-shown){
+    border-color:#B94A4A;
+  }
+  .two-col{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+  }
+
+  .submit-row{
+    margin-top:6px;
+    display:flex;
+    align-items:center;
+    gap:16px;
+    flex-wrap:wrap;
+  }
+  .submit-btn{
+    font-family:var(--mono);
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    background:var(--hot);
+    color:#170007;
+    border:none;
+    padding:16px 28px;
+    border-radius:999px;
+    cursor:pointer;
+    transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease;
+  }
+  .submit-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 30px -8px rgba(255,61,110,0.6);
+  }
+  .submit-btn:disabled{
+    opacity:0.6;
+    cursor:not-allowed;
+    transform:none;
+    box-shadow:none;
+  }
+  .fine-print{
+    font-size:12px;
+    color:var(--text-faint);
+  }
+
+  .form-msg{
+    display:none;
+    margin-top:18px;
+    padding:14px 16px;
+    border-radius:10px;
+    font-size:14px;
+    font-family:var(--body);
+  }
+  .form-msg.success{
+    display:block;
+    background:rgba(232,184,77,0.10);
+    border:1px solid rgba(232,184,77,0.4);
+    color:var(--gold);
+  }
+  .form-msg.error{
+    display:block;
+    background:rgba(185,74,74,0.10);
+    border:1px solid rgba(185,74,74,0.5);
+    color:#E88888;
+  }
+
+  /* =========================
+     FOOTER
+     ========================= */
+  footer{
+    border-top:1px solid var(--hairline);
+    padding:44px 0 56px;
+  }
+  .footer-inner{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:16px;
+  }
+  .footer-inner .logo{ font-size:16px; }
+  .footer-links{
+    display:flex;
+    gap:24px;
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--text-muted);
+  }
+  .footer-links a{ text-decoration:none; }
+  .footer-links a:hover{ color:var(--hot); }
+
+  /* =========================
+     RESPONSIVE
+     ========================= */
+  @media (max-width: 780px){
+    .details-grid{ grid-template-columns:repeat(2,1fr); row-gap:22px; }
+    .detail-item:nth-child(3){ border-left:none; padding-left:0; }
+    .pillars{ grid-template-columns:1fr; }
+    .ticket{ grid-template-columns:1fr; }
+    .ticket-stub{
+      border-left:none;
+      border-top:2px dashed var(--hairline);
+      padding:14px 0;
+      flex-direction:row;
+    }
+    .ticket-stub span{
+      writing-mode:horizontal-tb;
+      letter-spacing:0.18em;
+    }
+    .ticket::before, .ticket::after{
+      right:auto; left:50%; transform:translateX(-50%);
+    }
+    .ticket::before{ top:auto; bottom: calc(100% - 1px); margin-top:-11px; }
+    .ticket::after{ display:none; }
+    .two-col{ grid-template-columns:1fr; }
+    .ticket-main{ padding:34px 24px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ scroll-behavior:auto !important; transition:none !important; }
+  }
+
+  /* keyboard focus visibility */
+  a:focus-visible, button:focus-visible, input:focus-visible{
+    outline:2px solid var(--gold);
+    outline-offset:2px;
+  }
+</style>
+</head>
+<body>
+
+  <header class="nav">
+    <div class="nav-inner">
+      <div class="logo">PARTY<span>·</span>PRODUCTIONS<span>·</span>ATX</div>
+      <a href="#rsvp" class="nav-cta">Request Invite</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="wrap hero-inner">
+      <div>
+        <p class="eyebrow">Austin, TX &nbsp;·&nbsp; Founders, Funders &amp; Friends</p>
+        <h1>THE PARTY IS<span class="line2">THE PITCH ROOM</span></h1>
+      </div>
+      <p class="hero-sub">
+        Party Productions ATX throws the events where Austin's builders and backers
+        actually meet — no panel, no pitch deck, no name tags. Just a great room,
+        stiff drinks, and the right people in it.
+      </p>
+      <div class="hero-actions">
+        <a href="#rsvp" class="btn-primary">Request an Invite →</a>
+        <a href="#room" class="btn-ghost">What is this, exactly?</a>
+      </div>
+
+      <svg class="skyline" viewBox="0 0 1000 90" preserveAspectRatio="none" aria-hidden="true">
+        <rect x="0" y="40" width="30" height="50" fill="#1B1A28"/>
+        <rect x="35" y="20" width="22" height="70" fill="#1F1E2E"/>
+        <rect x="62" y="50" width="18" height="40" fill="#1B1A28"/>
+        <rect x="90" y="10" width="26" height="80" fill="#221F33"/>
+        <rect x="122" y="35" width="20" height="55" fill="#1B1A28"/>
+        <rect x="150" y="0" width="16" height="90" fill="#26223A"/>
+        <rect x="172" y="45" width="24" height="45" fill="#1F1E2E"/>
+        <rect x="205" y="25" width="18" height="65" fill="#1B1A28"/>
+        <rect x="230" y="55" width="30" height="35" fill="#221F33"/>
+        <rect x="270" y="5" width="20" height="85" fill="#1F1E2E"/>
+        <rect x="298" y="40" width="16" height="50" fill="#1B1A28"/>
+        <circle cx="850" cy="20" r="10" fill="#E8B84D" opacity="0.35"/>
+        <rect x="700" y="30" width="20" height="60" fill="#1B1A28"/>
+        <rect x="728" y="12" width="24" height="78" fill="#221F33"/>
+        <rect x="760" y="48" width="18" height="42" fill="#1F1E2E"/>
+        <rect x="790" y="0" width="16" height="90" fill="#26223A"/>
+        <rect x="812" y="38" width="26" height="52" fill="#1B1A28"/>
+        <rect x="900" y="20" width="20" height="70" fill="#1F1E2E"/>
+        <rect x="928" y="50" width="18" height="40" fill="#1B1A28"/>
+        <rect x="955" y="15" width="24" height="75" fill="#221F33"/>
+      </svg>
+    </div>
+  </section>
+
+  <div class="details-strip">
+    <div class="wrap details-grid">
+      <div class="detail-item">
+        <div class="detail-label">Date</div>
+        <div class="detail-value">To Be Announced</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-label">Location</div>
+        <div class="detail-value">Austin, TX — Venue TBA</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-label">Guest List</div>
+        <div class="detail-value">Invite Only</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-label">Dress</div>
+        <div class="detail-value">Sharp Casual</div>
+      </div>
+    </div>
+  </div>
+
+  <section class="section" id="room">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">The Room</p>
+        <h2>Three things happen at every event.</h2>
+      </div>
+      <div class="pillars">
+        <div class="pillar">
+          <div class="pillar-index">01</div>
+          <h3>Network</h3>
+          <p>A curated guest list of founders, operators, and investors who actually want to be introduced to each other — not handed a stack of business cards.</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-index">02</div>
+          <h3>Build</h3>
+          <p>Deals get sourced on dance floors more often than anyone admits. We just make the room worth showing up to.</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-index">03</div>
+          <h3>Celebrate</h3>
+          <p>Great music, a great bar, and a night worth remembering — because the best rooms are the ones people want to come back to.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="rsvp" id="rsvp">
+    <div class="wrap">
+      <div class="ticket">
+        <div class="ticket-main">
+          <p class="eyebrow ticket-eyebrow">Guest List</p>
+          <h2>Request Your Invite</h2>
+          <p class="ticket-desc">
+            Spots are limited and reviewed on a rolling basis. Tell us who you are —
+            we'll follow up with the details.
+          </p>
+
+          <form id="rsvp-form" novalidate>
+            <div class="field">
+              <label for="firstName">First Name</label>
+              <input type="text" id="firstName" name="firstName" placeholder="Jordan" required autocomplete="given-name">
+            </div>
+
+            <div class="two-col">
+              <div class="field">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="jordan@email.com" required autocomplete="email">
+              </div>
+              <div class="field">
+                <label for="mobile">Mobile Number</label>
+                <input type="tel" id="mobile" name="mobile" placeholder="(512) 555-0134" required autocomplete="tel">
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="instagram">Instagram Handle</label>
+              <input type="text" id="instagram" name="instagram" placeholder="@yourhandle" required>
+            </div>
+
+            <div class="submit-row">
+              <button type="submit" class="submit-btn" id="submit-btn">Submit Request</button>
+              <span class="fine-print">We'll never spam you. Promise.</span>
+            </div>
+
+            <div class="form-msg" id="form-msg"></div>
+          </form>
+        </div>
+        <div class="ticket-stub"><span>ATX · GUEST LIST</span></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <div class="logo">PARTY<span style="color:var(--hot)">·</span>PRODUCTIONS<span style="color:var(--hot)">·</span>ATX</div>
+      <div class="footer-links">
+        <a href="#rsvp">Request Invite</a>
+        <a href="#room">About</a>
+        <a href="#" target="_blank" rel="noopener">Instagram</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // -----------------------------------------------------------------
+    // RSVP form handling.
+    //
+    // This currently just validates the form and shows a success state
+    // in the browser — nothing is sent anywhere yet.
+    //
+    // TO CONNECT TO GOOGLE SHEETS LATER:
+    // 1. Create a Google Apps Script Web App bound to your target Sheet
+    //    that accepts a POST with JSON {firstName, email, instagram, mobile}
+    //    and appends a row.
+    // 2. Deploy it and copy the Web App URL.
+    // 3. Paste that URL into GOOGLE_SHEET_ENDPOINT below.
+    // 4. Uncomment the fetch() block inside handleSubmit().
+    // -----------------------------------------------------------------
+    const GOOGLE_SHEET_ENDPOINT = ""; // <-- paste Apps Script Web App URL here later
+
+    const form = document.getElementById('rsvp-form');
+    const msgBox = document.getElementById('form-msg');
+    const submitBtn = document.getElementById('submit-btn');
+
+    function showMessage(text, type){
+      msgBox.textContent = text;
+      msgBox.className = 'form-msg ' + type;
+    }
+
+    function normalizeInstagram(value){
+      const trimmed = value.trim();
+      if(!trimmed) return trimmed;
+      return trimmed.startsWith('@') ? trimmed : '@' + trimmed;
+    }
+
+    form.addEventListener('submit', async function(e){
+      e.preventDefault();
+
+      if(!form.checkValidity()){
+        form.reportValidity();
+        return;
+      }
+
+      const payload = {
+        firstName: document.getElementById('firstName').value.trim(),
+        email: document.getElementById('email').value.trim(),
+        instagram: normalizeInstagram(document.getElementById('instagram').value),
+        mobile: document.getElementById('mobile').value.trim(),
+        submittedAt: new Date().toISOString()
+      };
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Submitting…';
+      msgBox.className = 'form-msg';
+
+      try{
+        // Uncomment this block once GOOGLE_SHEET_ENDPOINT is set:
+        //
+        // await fetch(GOOGLE_SHEET_ENDPOINT, {
+        //   method: 'POST',
+        //   mode: 'no-cors',
+        //   headers: { 'Content-Type': 'application/json' },
+        //   body: JSON.stringify(payload)
+        // });
+
+        console.log('RSVP submitted (not yet connected to a sheet):', payload);
+
+        showMessage("You're on the list. We'll be in touch with details soon.", 'success');
+        form.reset();
+      }catch(err){
+        showMessage("Something went wrong submitting your request. Please try again.", 'error');
+      }finally{
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Submit Request';
+      }
+    });
+  </script>
+
+</body>
+</html>
