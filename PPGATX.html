@@ -128,32 +128,6 @@
   .hero{
     padding:88px 0 70px;
     position:relative;
-    overflow:hidden;
-  }
-  .hero-media{
-    position:absolute;
-    inset:0;
-    z-index:0;
-  }
-  .hero-media img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    object-position:center 38%;
-    display:block;
-  }
-  /* Dark gradient over the photo — keeps headline/body text readable
-     regardless of what's happening in the image underneath it. */
-  .hero-overlay{
-    position:absolute;
-    inset:0;
-    background:
-      linear-gradient(180deg, rgba(8,7,14,0.55) 0%, rgba(8,7,14,0.72) 40%, rgba(8,7,14,0.96) 100%),
-      radial-gradient(60% 45% at 18% 0%, rgba(255,61,110,0.20), transparent 60%);
-  }
-  .hero-inner{
-    position:relative;
-    z-index:2;
   }
   .hero-inner{
     display:grid;
@@ -172,50 +146,38 @@
     display:block;
     -webkit-text-stroke:1.5px var(--hot);
   }
-  .hero-sub{
-    max-width:520px;
-    font-size:17px;
-    color:var(--text-muted);
+  .hero-form{
+    max-width:640px;
+    margin-top:4px;
   }
-  .hero-actions{
-    display:flex;
-    gap:14px;
-    flex-wrap:wrap;
-    align-items:center;
-    margin-top:6px;
+  .hero-form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px 32px;
+    margin-bottom:26px;
   }
-  .btn-primary{
+  .hero-form .field label{
     font-family:var(--mono);
-    font-size:13px;
+    font-size:11px;
+    letter-spacing:0.1em;
     text-transform:uppercase;
-    letter-spacing:0.08em;
-    background:var(--hot);
-    color:#170007;
+    color:var(--text-faint);
+  }
+  .hero-form .field input{
+    width:100%;
+    background:transparent;
     border:none;
-    padding:16px 30px;
-    border-radius:999px;
-    cursor:pointer;
-    text-decoration:none;
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    box-shadow:0 0 0 0 rgba(255,61,110,0.5);
-    transition:transform .18s ease, box-shadow .18s ease;
-  }
-  .btn-primary:hover{
-    transform:translateY(-2px);
-    box-shadow:0 10px 30px -8px rgba(255,61,110,0.6);
-  }
-  .btn-ghost{
-    font-family:var(--mono);
-    font-size:13px;
-    text-transform:uppercase;
-    letter-spacing:0.08em;
-    color:var(--text-muted);
-    text-decoration:none;
     border-bottom:1px solid var(--hairline);
-    padding-bottom:2px;
+    border-radius:0;
+    padding:10px 2px;
+    color:var(--text);
+    font-family:var(--body);
+    font-size:15px;
+    outline:none;
+    transition:border-color .15s ease;
   }
+  .hero-form .field input::placeholder{ color:var(--text-faint); }
+  .hero-form .field input:focus{ border-bottom-color:var(--hot); }
 
   /* Skyline strip signature element */
   .skyline{
@@ -228,151 +190,8 @@
   }
 
   /* =========================
-     STAT / DETAILS STRIP
+     RSVP form fields (shared)
      ========================= */
-  .details-strip{
-    border-top:1px solid var(--hairline);
-    border-bottom:1px solid var(--hairline);
-    background:var(--bg-soft);
-  }
-  .details-grid{
-    display:grid;
-    grid-template-columns:repeat(4, 1fr);
-    padding-top:26px;
-    padding-bottom:26px;
-  }
-  .detail-item{
-    padding:0 20px;
-    border-left:1px solid var(--hairline);
-  }
-  .detail-item:first-child{ border-left:none; padding-left:0; }
-  .detail-label{
-    font-family:var(--mono);
-    font-size:11px;
-    letter-spacing:0.14em;
-    text-transform:uppercase;
-    color:var(--text-faint);
-    margin-bottom:6px;
-  }
-  .detail-value{
-    font-family:var(--body);
-    font-weight:600;
-    font-size:15px;
-    color:var(--text);
-  }
-
-  /* =========================
-     PILLARS ("The Room")
-     ========================= */
-  .section{ padding:96px 0; }
-  .section-head{
-    max-width:600px;
-    margin-bottom:52px;
-  }
-  .section-head h2{
-    font-family:var(--display);
-    text-transform:uppercase;
-    font-weight:400;
-    font-size:clamp(32px, 5vw, 52px);
-    line-height:1.02;
-    margin-top:10px;
-  }
-  .pillars{
-    display:grid;
-    grid-template-columns:repeat(3, 1fr);
-    gap:1px;
-    background:var(--hairline);
-    border:1px solid var(--hairline);
-    border-radius:var(--radius);
-    overflow:hidden;
-  }
-  .pillar{
-    background:var(--bg-soft);
-    padding:36px 30px;
-  }
-  .pillar-index{
-    font-family:var(--mono);
-    color:var(--hot);
-    font-size:13px;
-    margin-bottom:22px;
-  }
-  .pillar h3{
-    font-family:var(--display);
-    text-transform:uppercase;
-    font-weight:400;
-    font-size:22px;
-    margin-bottom:12px;
-    letter-spacing:0.01em;
-  }
-  .pillar p{
-    color:var(--text-muted);
-    font-size:14.5px;
-  }
-
-  /* =========================
-     RSVP — Ticket stub card
-     ========================= */
-  .rsvp{
-    padding:100px 0 120px;
-    position:relative;
-  }
-  .ticket{
-    max-width:620px;
-    margin:0 auto;
-    position:relative;
-    background:var(--surface-solid);
-    border:1px solid var(--hairline);
-    border-radius:20px;
-    display:grid;
-    grid-template-columns:1fr 120px;
-    box-shadow:0 40px 80px -30px rgba(0,0,0,0.7);
-  }
-  .ticket-main{ padding:44px 40px; }
-  .ticket-stub{
-    border-left:2px dashed var(--hairline);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    position:relative;
-  }
-  .ticket-stub span{
-    writing-mode:vertical-rl;
-    text-orientation:mixed;
-    font-family:var(--mono);
-    letter-spacing:0.24em;
-    font-size:12px;
-    color:var(--gold);
-    text-transform:uppercase;
-  }
-  /* perforation notches */
-  .ticket::before, .ticket::after{
-    content:"";
-    position:absolute;
-    right:118px;
-    width:22px; height:22px;
-    background:var(--bg);
-    border-radius:50%;
-    z-index:2;
-  }
-  .ticket::before{ top:-11px; }
-  .ticket::after{ bottom:-11px; }
-
-  .ticket-eyebrow{ margin-bottom:8px; }
-  .ticket h2{
-    font-family:var(--display);
-    text-transform:uppercase;
-    font-weight:400;
-    font-size:clamp(28px, 4.4vw, 38px);
-    line-height:1.02;
-    margin-bottom:10px;
-  }
-  .ticket-desc{
-    color:var(--text-muted);
-    font-size:14.5px;
-    margin-bottom:30px;
-    max-width:420px;
-  }
-
   form{ display:flex; flex-direction:column; gap:16px; }
   .field{ display:flex; flex-direction:column; gap:7px; }
   .field label{
@@ -464,72 +283,13 @@
   }
 
   /* =========================
-     FOOTER
-     ========================= */
-  footer{
-    border-top:1px solid var(--hairline);
-    padding:44px 0 56px;
-  }
-  .footer-inner{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    flex-wrap:wrap;
-    gap:16px;
-  }
-  .footer-inner .logo{ font-size:16px; }
-  .footer-links{
-    display:flex;
-    gap:24px;
-    font-family:var(--mono);
-    font-size:12px;
-    letter-spacing:0.06em;
-    text-transform:uppercase;
-    color:var(--text-muted);
-  }
-  .footer-links a{ text-decoration:none; }
-  .footer-links a:hover{ color:var(--hot); }
-
-  /* =========================
      RESPONSIVE
      ========================= */
   @media (max-width: 780px){
     .hero{ padding:44px 0 36px; }
     .hero-inner{ gap:26px; }
-    .section{ padding:56px 0; }
-    .section-head{ margin-bottom:34px; }
-    .details-grid{
-      grid-template-columns:1fr;
-      gap:0;
-      padding-top:4px;
-      padding-bottom:4px;
-    }
-    .detail-item{
-      border-left:none;
-      border-top:1px solid var(--hairline);
-      padding:14px 0;
-    }
-    .detail-item:first-child{ border-top:none; }
-    .pillars{ grid-template-columns:1fr; }
-    .ticket{ grid-template-columns:1fr; }
-    .ticket-stub{
-      border-left:none;
-      border-top:2px dashed var(--hairline);
-      padding:14px 0;
-      flex-direction:row;
-    }
-    .ticket-stub span{
-      writing-mode:horizontal-tb;
-      letter-spacing:0.18em;
-    }
-    .ticket::before, .ticket::after{
-      right:auto; left:50%; transform:translateX(-50%);
-    }
-    .ticket::before{ top:auto; bottom: calc(100% - 1px); margin-top:-11px; }
-    .ticket::after{ display:none; }
     .two-col{ grid-template-columns:1fr; }
-    .ticket-main{ padding:34px 24px; }
-    .rsvp{ padding:64px 0 72px; }
+    .hero-form-grid{ grid-template-columns:1fr; gap:16px; }
   }
 
   @media (prefers-reduced-motion: reduce){
@@ -547,33 +307,45 @@
 
   <header class="nav">
     <div class="nav-inner">
-      <div class="logo">PARTY<span>·</span>PRODUCTIONS<span>·</span>ATX</div>
+      <div class="logo">GROW<span>·</span>CONNECT<span>·</span>CREATE</div>
       <a href="#rsvp" class="nav-cta">Request Invite</a>
     </div>
   </header>
 
-  <section class="hero">
-    <div class="hero-media" aria-hidden="true">
-      <picture>
-        <source srcset="assets/hero-bg.webp" type="image/webp">
-        <img src="assets/hero-bg.jpg" alt="">
-      </picture>
-    </div>
-    <div class="hero-overlay" aria-hidden="true"></div>
+  <section class="hero" id="rsvp">
     <div class="wrap hero-inner">
       <div>
-        <p class="eyebrow">Austin, TX &nbsp;·&nbsp; Founders &amp; Funders</p>
-        <h1>THE PARTY IS<span class="line2">THE PITCH ROOM</span></h1>
+        <p class="eyebrow">Austin, TX</p>
+        <h1>RED CIRCL<span class="line2">EVENTS</span></h1>
       </div>
-      <p class="hero-sub">
-        Party Productions ATX throws the events where Austin's builders and backers
-        actually meet — no panel, no pitch deck, no name tags. Just a great room,
-        stiff drinks, and the right people in it.
-      </p>
-      <div class="hero-actions">
-        <a href="#rsvp" class="btn-primary">Request an Invite →</a>
-        <a href="#room" class="btn-ghost">What is this, exactly?</a>
-      </div>
+
+      <form class="hero-form" id="rsvp-form" novalidate>
+        <div class="hero-form-grid">
+          <div class="field">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" name="firstName" placeholder="Jordan" required autocomplete="given-name">
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="jordan@email.com" required autocomplete="email">
+          </div>
+          <div class="field">
+            <label for="instagram">Instagram Handle</label>
+            <input type="text" id="instagram" name="instagram" placeholder="@yourhandle" required>
+          </div>
+          <div class="field">
+            <label for="mobile">Mobile Number</label>
+            <input type="tel" id="mobile" name="mobile" placeholder="(512) 555-0134" required autocomplete="tel">
+          </div>
+        </div>
+
+        <div class="submit-row">
+          <button type="submit" class="submit-btn" id="submit-btn">Request Invite</button>
+          <span class="fine-print">We'll never spam you. Promise.</span>
+        </div>
+
+        <div class="form-msg" id="form-msg"></div>
+      </form>
 
       <svg class="skyline" viewBox="0 0 1000 90" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
         <rect x="0" y="40" width="30" height="50" fill="#1B1A28"/>
@@ -599,110 +371,6 @@
       </svg>
     </div>
   </section>
-
-  <div class="details-strip">
-    <div class="wrap details-grid">
-      <div class="detail-item">
-        <div class="detail-label">Date</div>
-        <div class="detail-value">To Be Announced</div>
-      </div>
-      <div class="detail-item">
-        <div class="detail-label">Location</div>
-        <div class="detail-value">Austin, TX — Venue TBA</div>
-      </div>
-      <div class="detail-item">
-        <div class="detail-label">Guest List</div>
-        <div class="detail-value">Invite Only</div>
-      </div>
-      <div class="detail-item">
-        <div class="detail-label">Dress</div>
-        <div class="detail-value">Sharp Casual</div>
-      </div>
-    </div>
-  </div>
-
-  <section class="section" id="room">
-    <div class="wrap">
-      <div class="section-head">
-        <p class="eyebrow">The Room</p>
-        <h2>Three things happen at every event.</h2>
-      </div>
-      <div class="pillars">
-        <div class="pillar">
-          <div class="pillar-index">01</div>
-          <h3>Network</h3>
-          <p>A curated guest list of founders, operators, and investors who actually want to be introduced to each other — not handed a stack of business cards.</p>
-        </div>
-        <div class="pillar">
-          <div class="pillar-index">02</div>
-          <h3>Build</h3>
-          <p>Deals get sourced on dance floors more often than anyone admits. We just make the room worth showing up to.</p>
-        </div>
-        <div class="pillar">
-          <div class="pillar-index">03</div>
-          <h3>Celebrate</h3>
-          <p>Great music, a great bar, and a night worth remembering — because the best rooms are the ones people want to come back to.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="rsvp" id="rsvp">
-    <div class="wrap">
-      <div class="ticket">
-        <div class="ticket-main">
-          <p class="eyebrow ticket-eyebrow">Guest List</p>
-          <h2>Request Your Invite</h2>
-          <p class="ticket-desc">
-            Spots are limited and reviewed on a rolling basis. Tell us who you are —
-            we'll follow up with the details.
-          </p>
-
-          <form id="rsvp-form" novalidate>
-            <div class="field">
-              <label for="firstName">First Name</label>
-              <input type="text" id="firstName" name="firstName" placeholder="Jordan" required autocomplete="given-name">
-            </div>
-
-            <div class="two-col">
-              <div class="field">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="jordan@email.com" required autocomplete="email">
-              </div>
-              <div class="field">
-                <label for="mobile">Mobile Number</label>
-                <input type="tel" id="mobile" name="mobile" placeholder="(512) 555-0134" required autocomplete="tel">
-              </div>
-            </div>
-
-            <div class="field">
-              <label for="instagram">Instagram Handle</label>
-              <input type="text" id="instagram" name="instagram" placeholder="@yourhandle" required>
-            </div>
-
-            <div class="submit-row">
-              <button type="submit" class="submit-btn" id="submit-btn">Submit Request</button>
-              <span class="fine-print">We'll never spam you. Promise.</span>
-            </div>
-
-            <div class="form-msg" id="form-msg"></div>
-          </form>
-        </div>
-        <div class="ticket-stub"><span>ATX · GUEST LIST</span></div>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <div class="wrap footer-inner">
-      <div class="logo">PARTY<span style="color:var(--hot)">·</span>PRODUCTIONS<span style="color:var(--hot)">·</span>ATX</div>
-      <div class="footer-links">
-        <a href="#rsvp">Request Invite</a>
-        <a href="#room">About</a>
-        <a href="#" target="_blank" rel="noopener">Instagram</a>
-      </div>
-    </div>
-  </footer>
 
   <script>
     // -----------------------------------------------------------------
