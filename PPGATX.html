@@ -77,6 +77,11 @@
     text-transform:uppercase;
     color:var(--gold);
   }
+  .hero .eyebrow{
+    font-size:clamp(9.5px, 3vw, 12px);
+    letter-spacing:clamp(0.08em, 1.6vw, 0.22em);
+    white-space:nowrap;
+  }
 
   /* =========================
      NAV
@@ -89,6 +94,8 @@
   }
   .nav-inner{
     display:flex; align-items:center; justify-content:space-between;
+    flex-wrap:wrap;
+    row-gap:10px;
     padding:16px 24px;
     max-width:var(--container);
     margin:0 auto;
@@ -96,7 +103,7 @@
   .logo{
     font-family:var(--display);
     letter-spacing:0.03em;
-    font-size:19px;
+    font-size:clamp(14px, 4vw, 19px);
     text-transform:uppercase;
   }
   .logo span{ color:var(--hot); }
@@ -187,7 +194,9 @@
   /* Skyline strip signature element */
   .skyline{
     width:100%;
-    height:64px;
+    aspect-ratio: 1000 / 90; /* matches the SVG viewBox — scales without distortion */
+    height:auto;
+    max-height:64px;
     display:block;
     opacity:0.9;
   }
@@ -458,8 +467,17 @@
      RESPONSIVE
      ========================= */
   @media (max-width: 780px){
-    .details-grid{ grid-template-columns:repeat(2,1fr); row-gap:22px; }
-    .detail-item:nth-child(3){ border-left:none; padding-left:0; }
+    .details-grid{
+      grid-template-columns:1fr;
+      gap:0;
+      padding:6px 0;
+    }
+    .detail-item{
+      border-left:none;
+      border-top:1px solid var(--hairline);
+      padding:16px 0;
+    }
+    .detail-item:first-child{ border-top:none; }
     .pillars{ grid-template-columns:1fr; }
     .ticket{ grid-template-columns:1fr; }
     .ticket-stub{
@@ -517,7 +535,7 @@
         <a href="#room" class="btn-ghost">What is this, exactly?</a>
       </div>
 
-      <svg class="skyline" viewBox="0 0 1000 90" preserveAspectRatio="none" aria-hidden="true">
+      <svg class="skyline" viewBox="0 0 1000 90" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
         <rect x="0" y="40" width="30" height="50" fill="#1B1A28"/>
         <rect x="35" y="20" width="22" height="70" fill="#1F1E2E"/>
         <rect x="62" y="50" width="18" height="40" fill="#1B1A28"/>
