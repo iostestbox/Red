@@ -78,9 +78,9 @@
     color:var(--gold);
   }
   .hero .eyebrow{
-    font-size:clamp(9.5px, 3vw, 12px);
-    letter-spacing:clamp(0.08em, 1.6vw, 0.22em);
-    white-space:nowrap;
+    font-size:clamp(9.5px, 2.8vw, 12px);
+    letter-spacing:clamp(0.05em, 0.4vw, 0.22em);
+    white-space:normal; /* wrap as a safety net — never clip text off-screen */
   }
 
   /* =========================
@@ -467,15 +467,19 @@
      RESPONSIVE
      ========================= */
   @media (max-width: 780px){
+    .hero{ padding:44px 0 36px; }
+    .hero-inner{ gap:26px; }
+    .section{ padding:56px 0; }
+    .section-head{ margin-bottom:34px; }
     .details-grid{
       grid-template-columns:1fr;
       gap:0;
-      padding:6px 0;
+      padding:4px 0;
     }
     .detail-item{
       border-left:none;
       border-top:1px solid var(--hairline);
-      padding:16px 0;
+      padding:14px 0;
     }
     .detail-item:first-child{ border-top:none; }
     .pillars{ grid-template-columns:1fr; }
@@ -497,6 +501,7 @@
     .ticket::after{ display:none; }
     .two-col{ grid-template-columns:1fr; }
     .ticket-main{ padding:34px 24px; }
+    .rsvp{ padding:64px 0 72px; }
   }
 
   @media (prefers-reduced-motion: reduce){
@@ -522,7 +527,7 @@
   <section class="hero">
     <div class="wrap hero-inner">
       <div>
-        <p class="eyebrow">Austin, TX &nbsp;·&nbsp; Founders, Funders &amp; Friends</p>
+        <p class="eyebrow">Austin, TX &nbsp;·&nbsp; Founders &amp; Funders</p>
         <h1>THE PARTY IS<span class="line2">THE PITCH ROOM</span></h1>
       </div>
       <p class="hero-sub">
